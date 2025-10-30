@@ -6,6 +6,7 @@ antlr4-python3-runtime==4.9.3
 anyio @ file:///home/task_175862240021031/conda-bld/anyio_1758622416828/work
 argon2-cffi @ file:///opt/conda/conda-bld/argon2-cffi_1645000214183/work
 argon2-cffi-bindings @ file:///home/task_175792493437065/conda-bld/argon2-cffi-bindings_1757924978114/work
+arrow==1.4.0
 asttokens @ file:///croot/asttokens_1743630435401/work
 async-lru @ file:///home/task_176112146506028/conda-bld/async-lru_1761121512028/work
 async-timeout==5.0.1
@@ -38,6 +39,7 @@ executing @ file:///home/task_175706097762404/conda-bld/executing_1757061230060/
 fastjsonschema @ file:///croot/python-fastjsonschema_1731939362158/work
 filelock @ file:///croot/filelock_1744281381737/work
 fonttools @ file:///home/task_175975444451365/conda-bld/fonttools_1759754870571/work
+fqdn==1.5.1
 frozenlist==1.8.0
 fsspec==2025.9.0
 future==1.0.0
@@ -53,10 +55,12 @@ hydra-core==1.3.2
 idna @ file:///croot/idna_1714398848350/work
 ipykernel @ file:///home/task_175758317055216/conda-bld/ipykernel_1757583366251/work
 ipython @ file:///croot/ipython_1734548052611/work
+isoduration==20.11.0
 jedi @ file:///croot/jedi_1733987392413/work
 Jinja2 @ file:///croot/jinja2_1741710844255/work
 joblib @ file:///home/task_175792628915440/conda-bld/joblib_1757926346336/work
 json5 @ file:///croot/json5_1730786798687/work
+jsonpointer==3.0.0
 jsonschema @ file:///croot/jsonschema_1753206402902/work
 jsonschema-specifications @ file:///croot/jsonschema-specifications_1699032386549/work
 jupyter-events @ file:///croot/jupyter_events_1741184577592/work
@@ -65,10 +69,11 @@ jupyter_client @ file:///croot/jupyter_client_1737570961872/work
 jupyter_core @ file:///croot/jupyter_core_1751991368470/work
 jupyter_server @ file:///croot/jupyter_server_1751996616172/work
 jupyter_server_terminals @ file:///croot/jupyter_server_terminals_1744706698694/work
-jupyterlab @ file:///home/task_175812493204303/conda-bld/jupyterlab_1758124979512/work
+jupyterlab==4.4.10
 jupyterlab_pygments @ file:///croot/jupyterlab_pygments_1741124142640/work
 jupyterlab_server @ file:///home/task_176175069236369/conda-bld/jupyterlab_server_1761751423764/work
 kiwisolver @ file:///croot/kiwisolver_1737039087198/work
+lark==1.3.1
 lightning==2.5.5
 lightning-utilities==0.15.2
 line_profiler==4.2.0
@@ -92,6 +97,7 @@ nest-asyncio @ file:///croot/nest-asyncio_1708532673751/work
 networkx @ file:///croot/networkx_1737039604450/work
 neurokit2==0.2.12
 nolds==0.6.2
+notebook==7.4.7
 notebook_shim @ file:///croot/notebook-shim_1741707758683/work
 numba==0.62.1
 numexpr @ file:///croot/numexpr_1755766469354/work
@@ -133,6 +139,7 @@ referencing @ file:///croot/referencing_1699012038513/work
 requests @ file:///croot/requests_1756709366904/work
 rfc3339-validator @ file:///croot/rfc3339-validator_1683077044675/work
 rfc3986-validator @ file:///croot/rfc3986-validator_1683058983515/work
+rfc3987-syntax==1.1.0
 rich==14.2.0
 rpds-py @ file:///croot/rpds-py_1736541261634/work
 scikit-learn @ file:///home/task_175861954415939/conda-bld/scikit-learn_1758619598212/work
@@ -167,9 +174,11 @@ triton==3.1.0
 typing-inspection==0.4.2
 typing_extensions @ file:///croot/typing_extensions_1756280817316/work
 tzdata @ file:///croot/python-tzdata_1746123641790/work
+uri-template==1.3.0
 urllib3 @ file:///croot/urllib3_1750775463400/work
 wandb==0.22.3
 wcwidth @ file:///croot/wcwidth_1750352883074/work
+webcolors==24.11.1
 webencodings==0.5.1
 websocket-client @ file:///croot/websocket-client_1715878298792/work
 wfdb==4.3.0
