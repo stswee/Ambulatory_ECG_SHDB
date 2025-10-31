@@ -10,9 +10,7 @@ Preprocess one ambulatory ECG recording from the SHDB-AF dataset:
   3. Z-score normalization
   4. Save as float32 .npz file in the preprocessed folder
 
-Usage
------
-$ python preprocess_single_ecg.py --record 001
+Returns a metadata dictionary including all processing times.
 """
 
 import os
@@ -38,10 +36,12 @@ def baseline_correction(signal, fs, window_sec=0.8):
 
 
 def preprocess_ecg(record_name, base_path):
-    """Load, preprocess, and save a single ECG recording."""
+    """Load, preprocess, and save a single ECG recording, returning metadata."""
     record_path = os.path.join(base_path, "1.0.1", record_name)
     save_dir = os.path.join(base_path, "preprocessed")
     os.makedirs(save_dir, exist_ok=True)
+
+    meta = {"record_id": record_name}
 
     # -----------------------------
     # Load ECG
@@ -51,8 +51,11 @@ def preprocess_ecg(record_name, base_path):
     record = wfdb.rdrecord(record_path)
     signal = record.p_signal[:, 0]
     fs = record.fs
+    load_time = time.time() - t0
+    meta["load_time_s"] = round(load_time, 3)
+
     print(f"  Sampling rate: {fs} Hz, Signal length: {len(signal)} samples")
-    print(f"  Load time: {time.time() - t0:.3f} s")
+    print(f"  Load time: {load_time:.3f} s")
 
     # -----------------------------
     # Preprocessing steps
@@ -60,24 +63,29 @@ def preprocess_ecg(record_name, base_path):
     # Bandpass filter
     t1 = time.time()
     filtered = bandpass_filter(signal, fs)
-    print(f"  Bandpass filtering took {time.time() - t1:.3f} s")
+    filter_time = time.time() - t1
+    meta["filter_time_s"] = round(filter_time, 3)
+    print(f"  Bandpass filtering took {filter_time:.3f} s")
 
     # Baseline correction
     t2 = time.time()
     baseline_corrected = baseline_correction(filtered, fs)
-    print(f"  Baseline correction took {time.time() - t2:.3f} s")
+    baseline_time = time.time() - t2
+    meta["baseline_time_s"] = round(baseline_time, 3)
+    print(f"  Baseline correction took {baseline_time:.3f} s")
 
     # Z-score normalization
     t3 = time.time()
     normalized = (baseline_corrected - np.mean(baseline_corrected)) / np.std(baseline_corrected)
     normalized32 = normalized.astype(np.float32)
-    print(f"  Z-score normalization took {time.time() - t3:.3f} s")
+    normalize_time = time.time() - t3
+    meta["normalize_time_s"] = round(normalize_time, 3)
+    print(f"  Z-score normalization took {normalize_time:.3f} s")
 
     # -----------------------------
     # Save preprocessed ECG
     # -----------------------------
     save_path = os.path.join(save_dir, f"{record_name}_preprocessed.npz")
-
     t4 = time.time()
     np.savez_compressed(
         save_path,
@@ -87,13 +95,30 @@ def preprocess_ecg(record_name, base_path):
         n_samples=len(normalized32)
     )
     save_time = time.time() - t4
+    meta["save_time_s"] = round(save_time, 3)
 
-    size_mb = os.path.getsize(save_path) / 1024 / 1024
+    size_mb = os.path.getsize(save_path) / 1e6
+    total_time = load_time + filter_time + baseline_time + normalize_time + save_time
+
     print(f" Saved preprocessed ECG to: {save_path}")
     print(f"   → File size: {size_mb:.2f} MB (dtype={normalized32.dtype})")
     print(f"   → Save time: {save_time:.3f} s")
 
-    return save_path
+    # -----------------------------
+    # Return metadata
+    # -----------------------------
+    meta.update({
+        "sampling_rate_hz": fs,
+        "signal_length": len(signal),
+        "num_channels": 1,
+        "duration_sec": round(len(signal) / fs, 2),
+        "output_file": save_path,
+        "output_size_mb": round(size_mb, 3),
+        "total_time_s": round(total_time, 3),
+        "status": "success",
+        "error_msg": "",
+    })
+    return meta
 
 
 if __name__ == "__main__":
@@ -107,4 +132,5 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    preprocess_ecg(args.record, args.base_path)
+    meta = preprocess_ecg(args.record, args.base_path)
+    print("\nMetadata summary:", meta)
