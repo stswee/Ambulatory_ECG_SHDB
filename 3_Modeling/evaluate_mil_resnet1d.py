@@ -221,7 +221,7 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     ds_test = ECGMILDataset(csv_path, seg_root, split="test", max_segments=None)
-    dl_test = DataLoader(ds_test, batch_size=1, shuffle=False, num_workers=4, collate_fn=mil_collate_fn)
+    dl_test = DataLoader(ds_test, batch_size=1, shuffle=False, num_workers=0, collate_fn=mil_collate_fn)
 
     model = MILResNetClassifier().to(device)
     model.load_state_dict(torch.load(weights_path, map_location=device))
