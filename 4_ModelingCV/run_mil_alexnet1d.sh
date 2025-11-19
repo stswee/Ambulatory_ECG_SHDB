@@ -7,7 +7,7 @@
 #
 # Environment: shdb-af-analysis
 # Script: train_mil_alexnet1d.py
-# GPU: CUDA_VISIBLE_DEVICES=1
+# GPU: CUDA_VISIBLE_DEVICES=0
 # ================================================================
 
 SESSION_NAME="mil_alexnet1d"
@@ -21,9 +21,8 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 LOGFILE="$LOG_DIR/mil_alexnet1d_${TIMESTAMP}.log"
 
 # Training parameters
-EPOCHS=30
+EPOCHS=10
 BATCH_SIZE=1
-MAX_SEGMENTS=64
 LR=1e-4
 SCRIPT_NAME="train_mil_alexnet1d.py"
 
@@ -43,11 +42,11 @@ tmux send-keys "conda activate $ENV_NAME" C-m
 tmux send-keys "cd $PROJECT_DIR" C-m
 
 # Set GPU and launch training
-tmux send-keys "export CUDA_VISIBLE_DEVICES=1" C-m
-tmux send-keys "echo 'Launching AlexNet1D MIL training on GPU 1... Logs at $LOGFILE'" C-m
-tmux send-keys "python $SCRIPT_NAME --epochs $EPOCHS --batch_size $BATCH_SIZE --max_segments $MAX_SEGMENTS --mixed_precision | tee $LOGFILE" C-m
+tmux send-keys "export CUDA_VISIBLE_DEVICES=0" C-m
+tmux send-keys "echo 'Launching AlexNet1D MIL training on GPU 0 (full windows)... Logs at $LOGFILE'" C-m
+tmux send-keys "python $SCRIPT_NAME --epochs $EPOCHS --batch_size $BATCH_SIZE --mixed_precision | tee $LOGFILE" C-m
 
-echo "Training started inside tmux session '$SESSION_NAME' (GPU 1)."
+echo "Training started inside tmux session '$SESSION_NAME' (GPU 0)."
 echo "To attach:  tmux attach -t $SESSION_NAME"
 echo "To detach:  press Ctrl+B then D"
 echo "Logs saved to: $LOGFILE"
