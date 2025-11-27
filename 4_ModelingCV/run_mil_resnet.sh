@@ -6,7 +6,7 @@
 #
 # Environment: shdb-af-analysis
 # Script: train_mil_resnet1d.py
-# GPU: CUDA_VISIBLE_DEVICES=1
+# GPU: CUDA_VISIBLE_DEVICES=5
 # ================================================================
 
 SESSION_NAME="mil_resnet1d"
@@ -36,10 +36,10 @@ tmux send-keys "source ~/.bashrc" C-m
 tmux send-keys "conda activate $ENV_NAME" C-m
 tmux send-keys "cd $PROJECT_DIR" C-m
 
-tmux send-keys "export CUDA_VISIBLE_DEVICES=1" C-m
-tmux send-keys "echo 'Launching ResNet1D MIL training on GPU 1... Logs at $LOGFILE'" C-m
+tmux send-keys "export CUDA_VISIBLE_DEVICES=5" C-m
+tmux send-keys "echo 'Launching ResNet1D MIL training on GPU 5... Logs at $LOGFILE'" C-m
 tmux send-keys "python $SCRIPT_NAME --epochs $EPOCHS --batch_size $BATCH_SIZE --mixed_precision | tee $LOGFILE" C-m
 
-echo "ResNet1D training started in tmux session '$SESSION_NAME' on GPU 1."
+echo "ResNet1D training started in tmux session '$SESSION_NAME' on GPU 5."
 echo "Attach: tmux attach -t $SESSION_NAME"
 echo "Detach: Ctrl+B then D"

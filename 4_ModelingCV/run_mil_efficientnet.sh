@@ -6,7 +6,7 @@
 #
 # Environment: shdb-af-analysis
 # Script: train_mil_efficientnet.py
-# GPU: CUDA_VISIBLE_DEVICES=2
+# GPU: CUDA_VISIBLE_DEVICES=4
 # ================================================================
 
 SESSION_NAME="mil_efficientnet"
@@ -36,10 +36,10 @@ tmux send-keys "source ~/.bashrc" C-m
 tmux send-keys "conda activate $ENV_NAME" C-m
 tmux send-keys "cd $PROJECT_DIR" C-m
 
-tmux send-keys "export CUDA_VISIBLE_DEVICES=2" C-m
-tmux send-keys "echo 'Launching EfficientNet MIL training on GPU 2... Logs at $LOGFILE'" C-m
+tmux send-keys "export CUDA_VISIBLE_DEVICES=4" C-m
+tmux send-keys "echo 'Launching EfficientNet MIL training on GPU 4... Logs at $LOGFILE'" C-m
 tmux send-keys "python $SCRIPT_NAME --epochs $EPOCHS --batch_size $BATCH_SIZE --mixed_precision | tee $LOGFILE" C-m
 
-echo "EfficientNet training started in tmux session '$SESSION_NAME' on GPU 2."
+echo "EfficientNet training started in tmux session '$SESSION_NAME' on GPU 4."
 echo "Attach: tmux attach -t $SESSION_NAME"
 echo "Detach: Ctrl+B then D"

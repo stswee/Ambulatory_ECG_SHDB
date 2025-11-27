@@ -19,7 +19,7 @@ ECG data structure:
 
 import os, glob, math, json, argparse
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"   # mask all GPUs except GPU 1
+os.environ["CUDA_VISIBLE_DEVICES"] = "5"   # mask all GPUs except GPU 1
 from dataclasses import dataclass
 from typing import Optional
 import numpy as np

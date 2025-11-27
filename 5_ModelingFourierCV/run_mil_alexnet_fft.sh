@@ -18,9 +18,8 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 LOGFILE="$LOG_DIR/mil_train_alexnet_fft_${TIMESTAMP}.log"
 
 # Training arguments
-EPOCHS=30
+EPOCHS=10
 BATCH_SIZE=1
-MAX_SEGMENTS=64
 LR=1e-4
 SCRIPT_NAME="train_mil_alexnet_fft.py"
 
@@ -42,7 +41,7 @@ tmux send-keys "cd $PROJECT_DIR" C-m
 # Run the training script
 tmux send-keys "export CUDA_VISIBLE_DEVICES=0" C-m
 tmux send-keys "echo 'Launching AlexNet FFT training... Logs at $LOGFILE'" C-m
-tmux send-keys "python $SCRIPT_NAME --epochs $EPOCHS --batch_size $BATCH_SIZE --max_segments $MAX_SEGMENTS --mixed_precision | tee $LOGFILE" C-m
+tmux send-keys "python $SCRIPT_NAME --epochs $EPOCHS --batch_size $BATCH_SIZE --mixed_precision | tee $LOGFILE" C-m
 
 echo "Training started inside tmux session '$SESSION_NAME'."
 echo "To attach:  tmux attach -t $SESSION_NAME"

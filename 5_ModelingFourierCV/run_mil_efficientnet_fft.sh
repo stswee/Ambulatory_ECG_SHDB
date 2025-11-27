@@ -38,11 +38,10 @@ tmux send-keys "source ~/.bashrc" C-m
 tmux send-keys "conda activate $ENV_NAME" C-m
 tmux send-keys "cd $PROJECT_DIR" C-m
 
-# Use GPU 0
-tmux send-keys "export CUDA_VISIBLE_DEVICES=0" C-m
-tmux send-keys "echo 'Launching EfficientNet FFT MIL training on GPU 0... Logs at $LOGFILE'" C-m
+tmux send-keys "export CUDA_VISIBLE_DEVICES=6" C-m
+tmux send-keys "echo 'Launching EfficientNet FFT MIL training on GPU 6... Logs at $LOGFILE'" C-m
 tmux send-keys "python $SCRIPT_NAME --epochs $EPOCHS --batch_size $BATCH_SIZE --mixed_precision | tee $LOGFILE" C-m
 
-echo "EfficientNet FFT MIL training started in tmux session '$SESSION_NAME' on GPU 0."
+echo "EfficientNet FFT MIL training started in tmux session '$SESSION_NAME' on GPU 6."
 echo "Attach: tmux attach -t $SESSION_NAME"
 echo "Detach: Ctrl+B then D"
